@@ -3,6 +3,8 @@ use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::sync::Arc;
+use std::thread::sleep;
+use std::time::Duration;
 
 use clap::Parser;
 use futures::stream::{self, StreamExt};
@@ -179,6 +181,8 @@ fn execute_ffmpeg_command(input_file: &str, output_file: &str, compress: bool) -
     }
 
     command.arg(output_file);
+
+    sleep(Duration::from_secs(100));
 
     let output = command.output().context("Failed to execute ffmpeg command")?;
 
